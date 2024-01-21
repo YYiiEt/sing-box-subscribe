@@ -13,7 +13,6 @@
       "store_fakeip": false
     }
   },
-  "dns": {},
   "inbounds": [
     {
       "type": "socks",
@@ -27,11 +26,13 @@
       "tag":"proxy",
       "type":"selector",
       "outbounds":[
+        "direct",
         "{all}"
       ]
+    },
+    {
+      "type": "direct",
+      "tag": "direct"
     }
-  ],
-  "route": {
-    "final": "proxy"
-  }
+  ]
 }
