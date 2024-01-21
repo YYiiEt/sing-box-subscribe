@@ -1,0 +1,116 @@
+{
+  "log": {
+    "level": "warn"
+  },
+  "experimental": {
+    "clash_api": {
+      "external_controller": "0.0.0.0:9090",
+      "external_ui": "ui",
+      "external_ui_download_url": "https://ghproxy.net/https://github.com/MetaCubeX/metacubexd/archive/refs/heads/gh-pages.zip"
+    },
+    "cache_file": {
+    "enabled": true,
+    "store_fakeip": false
+    }
+  },
+  "inbounds": [
+    {
+      "type": "socks",
+      "tag": "socks-in",
+      "listen": "127.0.0.1",
+      "listen_port": 1080
+    }
+  ],
+  "outbounds": [
+    {
+      "tag":"proxy",
+      "type":"selector",
+      "outbounds":[
+        "HongKong",
+        "TaiWan",
+        "Singapore",
+        "Japan",
+        "America",
+        "Others",
+        "{all}"
+      ]
+    },
+    {
+      "tag":"HongKong",
+      "type":"urltest",
+      "outbounds":[
+        "{all}"
+      ],
+      "filter":[
+        {"action":"include","keywords":["🇭🇰|HK|hk|香港|港|HongKong"]}
+      ],
+      "url": "https://cp.cloudflare.com/generate_204",
+      "interval": "10m",
+      "tolerance": 50
+    },
+    {
+      "tag":"TaiWan",
+      "type":"urltest",
+      "outbounds":[
+        "{all}"
+      ],
+      "filter":[
+        {"action":"include","keywords":["🇹🇼|TW|tw|台湾|臺灣|台|Taiwan"]}
+      ],
+      "url": "https://cp.cloudflare.com/generate_204",
+      "interval": "10m",
+      "tolerance": 50
+    },
+    {
+      "tag":"Singapore",
+      "type":"urltest",
+      "outbounds":[
+        "{all}"
+      ],
+      "filter":[
+        {"action":"include","keywords":["🇸🇬|SG|sg|新加坡|狮|Singapore"]}
+      ],
+      "url": "https://cp.cloudflare.com/generate_204",
+      "interval": "10m",
+      "tolerance": 50
+    },
+    {
+      "tag":"Japan",
+      "type":"urltest",
+      "outbounds":[
+        "{all}"
+      ],
+      "filter":[
+        {"action":"include","keywords":["🇯🇵|JP|jp|日本|日|Japan"]}
+      ],
+      "url": "https://cp.cloudflare.com/generate_204",
+      "interval": "10m",
+      "tolerance": 50
+    },
+    {
+      "tag":"America",
+      "type":"urltest",
+      "outbounds":[
+        "{all}"
+      ],
+      "filter":[
+        {"action":"include","keywords":["🇺🇸|US|us|美国|美|United States"]}
+      ],
+      "url": "https://cp.cloudflare.com/generate_204",
+      "interval": "10m",
+      "tolerance": 50
+    },
+    {
+      "tag":"Others",
+      "type":"urltest",
+      "outbounds":[
+        "{all}"
+      ],
+      "filter":[
+        {"action":"exclude","keywords":["🇭🇰|HK|hk|香港|香|🇹🇼|TW|tw|台湾|台|🇸🇬|SG|sg|新加坡|狮|🇯🇵|JP|jp|日本|日|🇺🇸|US|us|美国|美|网站|地址|剩余|流量|过期|时间|有效"]}
+      ],
+      "url": "https://cp.cloudflare.com/generate_204",
+      "interval": "10m",
+      "tolerance": 50
+    },
+}
